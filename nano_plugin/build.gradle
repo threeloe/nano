@@ -1,0 +1,20 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation gradleApi()
+    implementation "com.github.luben:zstd-jni:1.5.7-3"
+    implementation 'org.tukaani:xz:1.9'
+    implementation "org.smali:dexlib2:2.4.0"
+    compileOnly "com.android.tools.build:gradle:$AGP_VERSION"
+    compileOnly 'commons-io:commons-io:2.4'
+}
+
+apply from: file("../gradle/maven_upload.gradle")

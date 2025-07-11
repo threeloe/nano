@@ -1,0 +1,82 @@
+apply plugin: 'maven-publish'
+
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
+}
+
+def getReleaseRepositoryUrl() {
+    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL : readPropertyFromLocalProperties('RELEASE_REPOSITORY_URL')
+}
+
+def getSnapshotRepositoryUrl() {
+    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL : readPropertyFromLocalProperties('SNAPSHOT_REPOSITORY_URL')
+}
+
+def getRepositoryUsername() {
+    return hasProperty('REPOSITORY_USERNAME') ? REPOSITORY_USERNAME : readPropertyFromLocalProperties('REPOSITORY_USERNAME')
+}
+
+def getRepositoryPassword() {
+    return hasProperty('REPOSITORY_PASSWORD') ? REPOSITORY_PASSWORD : readPropertyFromLocalProperties('REPOSITORY_PASSWORD')
+}
+
+def readPropertyFromLocalProperties(String key) {
+    Properties properties = new Properties()
+    try {
+        properties.load(project.rootProject.file('./local.properties').newDataInputStream())
+    } catch (Exception e) {
+        println("load local properties failed msg:${e.message}")
+    }
+    return properties.getProperty(key)
+}
+
+
+
+group = GROUP_ID
+archivesBaseName = ARTIFACT_ID
+version = VERSION_NAME
+
+afterEvaluate {
+    if(plugins.hasPlugin('com.android.library')) {
+        task sourcesJar(type: Jar) {
+            archiveClassifier = 'sources'
+            from android.sourceSets.main.java.srcDirs
+        }
+    }
+
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = group
+                artifactId = archivesBaseName
+                if (plugins.hasPlugin('com.android.library')) {
+                    // For android library
+                    from components.release
+                    artifact sourcesJar
+                } else if (plugins.hasPlugin('groovy')) {
+                    // For gradle plugins
+                    from components.java
+                } else {
+                    from components.java
+                }
+                version = this.version
+            }
+        }
+        repositories {
+            maven {
+                if(isReleaseBuild()) {
+                    url = getReleaseRepositoryUrl()
+                } else {
+                    url = getSnapshotRepositoryUrl()
+                }
+                credentials {
+                    username = getRepositoryUsername()
+                    password = getRepositoryPassword()
+                }
+            }
+        }
+    }
+}
+
+
+
