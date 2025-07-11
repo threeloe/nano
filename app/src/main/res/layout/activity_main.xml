@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_load_so_no_dependency"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:text="Load So no dependency"
+        android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:id="@+id/btn_load_so_has_dependency"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="load so has dependency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:id="@+id/btn_start_second_activity"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Start SecondActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

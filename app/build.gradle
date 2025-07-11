@@ -1,0 +1,115 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 34
+    namespace "com.threeloe.nano.demo"
+    defaultConfig {
+        applicationId "com.threeloe.nano.demo"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+
+        if (ONLY_ABOVE_ANDROID_P.toBoolean()) {
+            manifestPlaceholders = [applicationName: "com.threeloe.nano.demo.abovep.DemoApplication"]
+        } else {
+            manifestPlaceholders = [applicationName: "com.threeloe.nano.demo.app.DemoApplication"]
+        }
+
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../assets/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {}
+
+        release {
+            signingConfig signingConfigs.release
+            shrinkResources false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    bundle {
+        language {
+            enableSplit = true
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+
+    dynamicFeatures = [':dftest']
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    implementation "com.tencent:mmkv-static:1.2.13"
+    implementation "com.bytedance.android:shadowhook:1.0.8"
+    implementation "com.facebook.soloader:soloader:0.10.5"
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation("androidx.annotation:annotation:1.0.0")
+    implementation("androidx.core:core:1.2.0")
+    implementation 'org.tensorflow:tensorflow-lite:2.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+
+    if (USE_SOURCE.toBoolean()) {
+        implementation project(':nano')
+    } else {
+        implementation "com.github.threeloe.nano:nano:$TEST_VERSION_NAME"
+    }
+    implementation "com.github.luben:zstd-jni:1.5.7-3@aar"
+    implementation "org.tukaani:xz:1.9"
+}
+
+
+apply plugin: "com.threeloe.nano"
+
+nano {
+    enable = true
+    compressMethod = "zstd"
+    groups {
+        launch {
+            blockNum 4
+            include "libijkffmpeg.so"
+            include "libijkplayer.so"
+            include "libijksdl.so"
+            include "libshadowhook.so"
+        }
+        second {
+            blockNum 2
+            include "libtensorflowlite_jni.so"
+            include "libtensorflowlite_gpu_jni.so"
+        }
+
+    }
+}
+
+
+
+
+
+
