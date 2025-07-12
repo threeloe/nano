@@ -1,8 +1,7 @@
 #publish libraries
-./gradlew :nano:publishMavenNanoPublicationToMavenRepository
-./gradlew :nano_impl:publishMavenNanoPublicationToMavenRepository
-./gradlew :nano_api:publishMavenNanoPublicationToMavenRepository
+./gradlew :nano:publishReleasePublicationToMavenRepository
+./gradlew :nano_core:publishReleasePublicationToMavenRepository
+./gradlew :nano_api:publishReleasePublicationToMavenRepository
 
 #publish gradle plugin
-cd buildSrc
-../gradlew publishMavenNanoPublicationToMavenRepository
+./gradlew :nano_plugin:publishReleasePublicationToMavenRepository

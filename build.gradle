@@ -1,6 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
+        maven {
+            url "https://maven.garenanow.com/nexus/content/groups/public/"
+        }
         maven { url 'https://jitpack.io'}
         mavenLocal()
         google()
@@ -9,12 +12,16 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$AGP_VERSION"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
-        //classpath "com.github.threeloe.nano:plugin:$TEST_VERSION_NAME"
+        classpath "com.github.threeloe.nano:plugin:$TEST_VERSION_NAME"
     }
 }
 
 allprojects {
     repositories {
+        maven {
+            url "https://maven.garenanow.com/nexus/content/groups/public/"
+        }
+
         maven { url 'https://jitpack.io'}
         mavenLocal()
         mavenCentral()
