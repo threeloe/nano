@@ -1,9 +1,8 @@
 # Nano
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/yourusername/yourrepo/pulls) [![Release](https://jitpack.io/v/threeloe/nano.svg)](https://jitpack.io/#threeloe/nano)
-    
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/threeloe/nano/pulls) [![Release](https://jitpack.io/v/threeloe/nano.svg)](https://jitpack.io/#threeloe/nano)
+
 [README 中文版](./README.zh-CN.md)
 
-# Nano
 Nano is an Android SO file compression framework designed to reduce the size of shared object (SO) files within APK or AAB files while supporting runtime dynamic loading. Common use cases include:
 * **Pre-installed apps** - Device manufacturers often require SO files to be stored in non-compressed form within the APK, significantly increasing package size while imposing strict size limitations.
 * **Lite versions** - Applications with extremely stringent package size requirements.

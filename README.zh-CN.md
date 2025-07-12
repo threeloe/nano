@@ -1,4 +1,6 @@
 # Nano
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/threeloe/nano/pulls) [![Release](https://jitpack.io/v/threeloe/nano.svg)](https://jitpack.io/#threeloe/nano)
+
 Nano是一个Android SO文件压缩框架，用于将APK/AAB文件中的SO文件压缩为更小体积，并支持运行时动态加载。常见应用场景：
 * **预装包场景**：厂商要求SO文件必须以store（非压缩）形式存在，导致包体积显著增大，同时厂商对包体大小有严格限制
 * **极速版应用**：对包体积要求极高的应用场景

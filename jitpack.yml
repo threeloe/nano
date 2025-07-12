@@ -2,5 +2,4 @@ jdk:
   - openjdk11
 install:
   - echo "Running install command"
-  - ./gradlew clean
-  - ./gradlew publishToMavenLocal
+  - ./gradlew clean publishToMavenLocal
