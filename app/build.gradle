@@ -87,27 +87,27 @@ dependencies {
 }
 
 
-//apply plugin: "com.threeloe.nano"
-//
-//nano {
-//    enable = true
-//    compressMethod = "zstd"
-//    groups {
-//        launch {
-//            blockNum 4
-//            include "libijkffmpeg.so"
-//            include "libijkplayer.so"
-//            include "libijksdl.so"
-//            include "libshadowhook.so"
-//        }
-//        second {
-//            blockNum 2
-//            include "libtensorflowlite_jni.so"
-//            include "libtensorflowlite_gpu_jni.so"
-//        }
-//
-//    }
-//}
+apply plugin: "com.threeloe.nano"
+
+nano {
+    enable = true
+    compressMethod = "zstd"
+    groups {
+        launch {
+            blockNum 4
+            include "libijkffmpeg.so"
+            include "libijkplayer.so"
+            include "libijksdl.so"
+            include "libshadowhook.so"
+        }
+        second {
+            blockNum 2
+            include "libtensorflowlite_jni.so"
+            include "libtensorflowlite_gpu_jni.so"
+        }
+
+    }
+}
 
 
 
