@@ -80,7 +80,7 @@ dependencies {
     implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
 
     if(USE_SOURCE.toBoolean()){
-       // implementation project(':nano')
+        implementation project(':nano')
     }else {
         implementation "com.github.threeloe.nano:nano:$TEST_VERSION_NAME"
     }

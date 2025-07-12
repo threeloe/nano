@@ -1,2 +1,5 @@
 jdk:
   - openjdk11
+install:
+  - echo "execute Installing script"
+  - ./gradlew clean publishToMavenLocal
