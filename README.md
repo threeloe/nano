@@ -189,7 +189,7 @@ nanoConfig.xzCompressMethod(object : IDecompressMethod {
 ```
 
 ## Compatibility
-* **Gradle Plugin**: Compatible with Android Gradle Plugin 7.0+
+* **Gradle Plugin**: Compatible with Android Gradle Plugin 7.0 and above
 * **Android Versions**: Supports Android 5.0 (API 21) and higher
 
 ## License
