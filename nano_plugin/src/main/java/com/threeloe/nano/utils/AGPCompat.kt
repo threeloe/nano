@@ -18,6 +18,7 @@
 
 package com.threeloe.nano.utils
 
+import com.android.build.api.component.impl.ComponentImpl
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -69,6 +70,17 @@ object AGPCompat {
                 .get(null) as String
         } catch (e: Exception) {
             "3.2.0"
+        }
+    }
+
+    fun getVariantByComponentInfo(component: Any): ComponentImpl{
+        try {
+            val getVariantMethod = component.javaClass.getMethod("getVariant")
+            getVariantMethod.isAccessible = true
+            val result = getVariantMethod.invoke(component)
+            return result as ComponentImpl
+        } catch (e: Exception) {
+            throw GradleException("Can't get variant :$e, please check your AGP version.")
         }
     }
 
