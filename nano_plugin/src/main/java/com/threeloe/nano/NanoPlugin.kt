@@ -46,10 +46,10 @@ class NanoPlugin : Plugin<Project> {
             )
             val variants = appPlugin?.variantManager?.mainComponents
             variants?.forEach { component ->
-                val variant = component.variant
+                val variant = AGPCompat.getVariantByComponentInfo(component)
                 val variantName = variant.name.replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(
-                        Locale.getDefault()
+                        Locale.ROOT
                     ) else it.toString()
                 }
                 val compressAssetsTask = AGPCompat.getCompressAssetsTask(project, variantName)
