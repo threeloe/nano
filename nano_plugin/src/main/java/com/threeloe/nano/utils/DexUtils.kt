@@ -38,7 +38,7 @@ object DexUtils {
 
     private fun getDexFiles(inputs: Collection<File>): List<File> {
         val dexFiles = inputs.flatMap { dexDir ->
-            println("[${NanoPlugin.TAG}] input: DexFilesSet=${dexDir.absolutePath}")
+            NanoLog.d("input: DexFilesSet=${dexDir.absolutePath}")
             dexDir.walk()
                 .filter { it.isFile && it.extension == DEX_FILE_SUFFIX }
                 .toList()

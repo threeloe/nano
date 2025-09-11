@@ -26,6 +26,7 @@ import com.threeloe.nano.compress.info.CompressInfoWriter
 import com.threeloe.nano.utils.AGPCompat
 import com.threeloe.nano.utils.DexUtils
 import com.threeloe.nano.utils.NanoFileUtils
+import com.threeloe.nano.utils.NanoLog
 import org.gradle.api.GradleException
 import java.io.File
 
@@ -73,6 +74,7 @@ class SoCompressor(private val context: NanoContext) {
 
     private fun processGroupFiles(abi: String, groupName: String, files: List<File>) {
         val outputPath = getOutputPath(abi)
+        NanoLog.d(" processGroupFiles, abi=$abi, group=$groupName, files=${files.size}, outputPath=${outputPath.absolutePath}")
         val suffix = getFileSuffix()
         val blockSet = NanoFileUtils.groupFilesEvenly(files, getBlockNum(groupName))
         blockSet.forEachIndexed { index, fileList ->
@@ -104,7 +106,7 @@ class SoCompressor(private val context: NanoContext) {
     }
 
     private fun getOutputPath(abi: String): File {
-        return  File(soOutputDir, "lib/$abi")
+        return  File(File(soOutputDir, "lib"),abi)
     }
 
     private fun getFileSuffix(): String {
@@ -117,7 +119,9 @@ class SoCompressor(private val context: NanoContext) {
 
     private fun collectSoFiles(): Map<String, MutableMap<String, MutableList<File>>> {
         val soFiles = mutableMapOf<String, MutableMap<String, MutableList<File>>>()
-        getSoDir().forEach { soDir ->
+        val soDirs = getSoDir()
+        NanoLog.d("collect .so files from directories:$soDirs")
+        soDirs.forEach { soDir ->
             soDir.walk().filter { it.isFile && it.extension == SO_FILE_SUFFIX }
                 .forEach { file ->
                     val abi = NanoFileUtils.getAbi(file.toRelativeString(soDir))
@@ -129,7 +133,7 @@ class SoCompressor(private val context: NanoContext) {
                 }
         }
         if (soFiles.isEmpty()) {
-            println("[${NanoPlugin.TAG}] No valid .so files found in the specified directories.")
+            NanoLog.d("No valid .so files found in directories:$soDirs")
         }
         return soFiles
     }
