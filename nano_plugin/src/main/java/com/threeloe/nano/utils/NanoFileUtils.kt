@@ -26,7 +26,7 @@ import java.util.regex.Pattern
 
 object NanoFileUtils {
 
-    private val SO_FILE_PATTERN = Pattern.compile("lib/([^/]+)/([^/]+\\.so)")
+    private val SO_FILE_PATTERN = Pattern.compile("lib[\\\\/]([^/]+)[\\\\/]([^/]+\\.so)")
 
     fun getAbi(input: String): String? {
         return SO_FILE_PATTERN.matcher(input).takeIf { it.matches() }?.group(1)
