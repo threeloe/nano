@@ -20,6 +20,7 @@ package com.threeloe.nano.compress.info
 
 import com.threeloe.nano.NanoContext
 import com.threeloe.nano.NanoPlugin
+import com.threeloe.nano.utils.NanoLog
 import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.Opcode
 import org.jf.dexlib2.Opcodes
@@ -62,13 +63,12 @@ class CompressInfoWriter(private val context: NanoContext) {
 
     fun write(compressBlockMap: Map<String,List<CompressBlock>>, targetDex: File) {
         val dexFile = DexFileFactory.loadDexFile(targetDex, Opcodes.getDefault())
-        println("[${NanoPlugin.TAG}] start writing compress info: ${targetDex.absolutePath}")
+        NanoLog.d("start writing compress info: ${targetDex.absolutePath}")
         val reWriter = DexRewriter(createRewriterModule(compressBlockMap))
         val newDexFile = reWriter.dexFileRewriter.rewrite(dexFile)
         DexFileFactory.writeDexFile(targetDex.path, newDexFile)
-        println("[${NanoPlugin.TAG}] finish writing compress info: ${targetDex.absolutePath}")
+        NanoLog.d("finish writing compress info: ${targetDex.absolutePath}")
     }
-
 
     private fun createRewriterModule(
         compressBlockMap: Map<String,List<CompressBlock>>

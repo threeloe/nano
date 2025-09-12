@@ -20,6 +20,7 @@ package com.threeloe.nano
 
 import com.threeloe.nano.core.SoCompressor
 import com.threeloe.nano.utils.AGPCompat
+import com.threeloe.nano.utils.NanoLog
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -30,7 +31,6 @@ class NanoPlugin : Plugin<Project> {
 
     companion object {
         private const val CONSTANT_NANO = "nano"
-        const val TAG = "NanoPlugin"
     }
 
     override fun apply(project: Project) {
@@ -52,6 +52,7 @@ class NanoPlugin : Plugin<Project> {
                         Locale.ROOT
                     ) else it.toString()
                 }
+                NanoLog.d("variant: $variantName")
                 val compressAssetsTask = AGPCompat.getCompressAssetsTask(project, variantName)
                 val stripSoTask = AGPCompat.getStripSoTask(project, variantName)
                 stripSoTask.doLast {
