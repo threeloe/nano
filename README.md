@@ -26,7 +26,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.github.threeloe.nano:plugin:1.0.0"
+        classpath "com.github.threeloe.nano:plugin:1.0.2"
     }
 }
 ```
@@ -56,7 +56,7 @@ nano {
 Add the sdk dependency:
 ```groovy
 dependencies {
-    implementation "com.github.threeloe.nano:nano:1.0.0"
+    implementation "com.github.threeloe.nano:nano:1.0.2"
     //zstd decompression method for Android
     implementation "com.github.luben:zstd-jni:1.5.7-3@aar"
 }
